@@ -10,12 +10,12 @@ services:
   - docker
 
 before_install:
-  - docker build -t kenken64/bitcoin-app .
+  - docker build -t tyson-tanys/bitcoin-app .
 
 notifications:
   email:
     recipients:
-      - bunnyppl@gmail.com
+      - tyson.tan@ncs.com.sg
     on_success: always
     on_failure: always
 branches:
@@ -29,7 +29,7 @@ script:
   - npm audit fix
   - npm update
   - npm i @angular-devkit/build-angular@0.803.24
-  - ng build --prod --base-href https://kenken64.github.io/bitcoin-order-app/
+  - ng build --prod --base-href https://github.com/tyson-tanys/bitcoin-order-app.git
 
 after_success:
   - docker build -t kenken64/bitcoin-app .
@@ -41,7 +41,7 @@ after_success:
   - eval $(aws ecr get-login --no-include-email --region ap-southeast-2) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
   - docker tag kenken64/bitcoin-app 869041221584.dkr.ecr.ap-southeast-2.amazonaws.com/bitcoinapp
   - docker push 869041221584.dkr.ecr.ap-southeast-2.amazonaws.com/bitcoinapp
-  - git push https://github.com/kenken64/bitcoin-order-app.git :feature
+  - git push https://github.com/tyson-tanys/bitcoin-order-app.git :feature
   
 
 deploy:
